@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Keyword Blocker</title>
+  <style>
+    :root { color-scheme: light dark; }
+    body { font: 14px system-ui, sans-serif; width: 300px; margin: 0; padding: 14px; }
+    h1 { font-size: 15px; margin: 0 0 10px; }
+    form { display: flex; gap: 6px; }
+    input { flex: 1; padding: 6px 8px; font: inherit; }
+    button { font: inherit; cursor: pointer; padding: 6px 10px; }
+    ul { list-style: none; margin: 12px 0 0; padding: 0; max-height: 220px; overflow-y: auto; }
+    li { display: flex; justify-content: space-between; align-items: center;
+         padding: 5px 0; border-bottom: 1px solid rgba(128,128,128,.3); }
+    li button { padding: 2px 8px; }
+    .empty { opacity: .6; margin-top: 12px; }
+    .hint { opacity: .6; font-size: 12px; margin-top: 10px; }
+  </style>
+</head>
+<body>
+  <h1>Keyword Blocker</h1>
+  <form id="form">
+    <input id="input" placeholder="Add a keyword" autocomplete="off" autofocus>
+    <button type="submit">Add</button>
+  </form>
+  <ul id="list"></ul>
+  <div id="empty" class="empty" hidden>No keywords yet.</div>
+  <div class="hint">Case-insensitive. Changes apply immediately.</div>
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -10,11 +10,7 @@ A small Chrome/Edge/Brave extension that hides videos, posts, comments and searc
 
 ## Configure
 
-Edit the `BLOCKED` list at the top of `content.js`, then reload the extension and refresh the page.
-
-```js
-const BLOCKED = ["keyword one", "keyword two"];
-```
+Click the extension's toolbar icon to add or remove keywords. Changes apply immediately on open tabs and sync across your signed-in browsers. The list starts empty.
 
 Matching is case-insensitive and based on the text of each item.
 

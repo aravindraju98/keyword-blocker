@@ -1,5 +1,12 @@
-// Edit this list to block more names/keywords (case-insensitive).
-const BLOCKED = ["asmongold", "asmon gold", "asmontv", "asmon tv"];
+// Keywords are managed from the extension popup and stored in chrome.storage.sync.
+let re = null;
+
+function setKeywords(list) {
+  const words = (list || []).filter(Boolean);
+  re = words.length
+    ? new RegExp(words.map(s => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|"), "i")
+    : null;
+}
 
 // Specific item containers: hidden whenever their text matches (no size limit).
 const SPECIFIC = [
@@ -44,10 +51,6 @@ const GENERIC = ["article", "[role='article']", "li", "[role='option']"].join(",
 const GENERIC_MAX_LEN = 1500;
 
 const HIDDEN_ATTR = "data-noassguy";
-const re = new RegExp(
-  BLOCKED.map(s => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|"),
-  "i"
-);
 
 function hide(el) {
   el.setAttribute(HIDDEN_ATTR, "1");
@@ -61,7 +64,7 @@ function show(el) {
 function process(list, maxLen) {
   for (const el of list) {
     const text = el.textContent || "";
-    const matches = re.test(text);
+    const matches = re ? re.test(text) : false;
     const hidden = el.hasAttribute(HIDDEN_ATTR);
     if (matches && !hidden) {
       if (maxLen && text.length > maxLen) continue;
@@ -91,4 +94,14 @@ new MutationObserver(schedule).observe(document.documentElement, {
 // YouTube is a single-page app: rescan on its navigation events too.
 window.addEventListener("yt-navigate-finish", schedule);
 document.addEventListener("scroll", schedule, { passive: true });
-scan();
+
+chrome.storage.sync.get({ keywords: [] }, ({ keywords }) => {
+  setKeywords(keywords);
+  scan();
+});
+chrome.storage.onChanged.addListener((changes, area) => {
+  if (area === "sync" && changes.keywords) {
+    setKeywords(changes.keywords.newValue);
+    scan(); // hides new matches and restores items that no longer match
+  }
+});
