@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "Keyword Blocker",
+  "version": "1.0",
+  "description": "Hides videos, posts and search results that contain keywords you choose.",
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
