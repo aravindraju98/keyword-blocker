@@ -2,6 +2,10 @@
 
 A small Chrome/Edge/Brave extension that hides videos, posts, comments and search results containing keywords you choose. Everything runs locally in your browser.
 
+## Why I built this
+
+I tried to remove Asmongold content from YouTube (using "Not interested" and "Don't recommend channel"), but it kept coming back. This extension hides anything matching keywords I choose, so I don't have to keep fighting the recommendations.
+
 ## Install
 
 1. Open `chrome://extensions` (or `edge://extensions`).
