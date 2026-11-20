@@ -95,7 +95,7 @@ new MutationObserver(schedule).observe(document.documentElement, {
 window.addEventListener("yt-navigate-finish", schedule);
 document.addEventListener("scroll", schedule, { passive: true });
 
-chrome.storage.sync.get({ keywords: [] }, ({ keywords }) => {
+chrome.storage.sync.get({ keywords: DEFAULT_KEYWORDS }, ({ keywords }) => {
   setKeywords(keywords);
   scan();
 });

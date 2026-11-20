@@ -38,7 +38,7 @@ form.addEventListener("submit", e => {
   input.value = "";
 });
 
-chrome.storage.sync.get({ keywords: [] }, res => {
+chrome.storage.sync.get({ keywords: DEFAULT_KEYWORDS }, res => {
   keywords = res.keywords;
   render();
 });

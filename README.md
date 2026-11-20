@@ -10,7 +10,7 @@ A small Chrome/Edge/Brave extension that hides videos, posts, comments and searc
 
 ## Configure
 
-Click the extension's toolbar icon to add or remove keywords. Changes apply immediately on open tabs and sync across your signed-in browsers. The list starts empty.
+Click the extension's toolbar icon to add or remove keywords. Changes apply immediately on open tabs and sync across your signed-in browsers. The starting list is in `defaults.js`; once you edit it in the popup, your saved list is used instead.
 
 Matching is case-insensitive and based on the text of each item.
 
